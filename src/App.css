@@ -11,18 +11,25 @@
 .search-input {
   padding: 4px;
   width: 500px;
-  margin-bottom: 10px;
 }
 
 .search-results {
   text-align: start;
   margin-bottom: 10px;
   padding: 5px;
-  border: 1px solid black
+  border: 1px solid black;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .search-result {
-  padding: 2px 0;
+  padding: 2px 5px;
+  margin: 0 -5px;
+}
+
+.search-result:hover {
+  background-color: lightgray;
+  cursor: pointer;
 }
 
 @keyframes logo-spin {
