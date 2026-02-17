@@ -21,13 +21,22 @@ function App() {
   return (
     <div>
       <h1>Auto Complete Search</h1>
-      <input
-        type="text"
-        placeholder="Search..."
-        className="search-input"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search-input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <div className="search-results">
+          {recipes.map((recipe) => (
+            <div key={recipe.id} className="search-result">
+              {recipe.name}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

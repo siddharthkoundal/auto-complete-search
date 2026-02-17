@@ -2,9 +2,27 @@
   text-align: center;
 }
 
+.search-container {
+  max-width: 510px;
+  margin: auto;
+  justify-content: center;
+}
+
 .search-input {
   padding: 4px;
-  width: 400px;
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.search-results {
+  text-align: start;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid black
+}
+
+.search-result {
+  padding: 2px 0;
 }
 
 @keyframes logo-spin {
