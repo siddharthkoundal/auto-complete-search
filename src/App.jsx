@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import { useDebounce } from "./useDebounce";
 
 function App() {
   const [input, setInput] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [showRecipes, setShowRecipes] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(
-        "https://dummyjson.com/recipes/search?q=" + input,
-      );
-      const jsonData = await res.json();
-      setRecipes(jsonData?.recipes);
-    };
+  const fetchData = async (query) => {
+    if (!query.trim()) return;
+    const res = await fetch("https://dummyjson.com/recipes/search?q=" + query);
+    const jsonData = await res.json();
+    setRecipes(jsonData?.recipes);
+  };
 
-    fetchData();
-  }, [input]);
-
-  console.log(input);
-  console.log(recipes);
+  const debouncedFetch = useDebounce(fetchData, 300);
 
   return (
     <div>
@@ -30,7 +25,10 @@ function App() {
           placeholder="Search..."
           className="search-input"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value);
+            debouncedFetch(e.target.value);
+          }}
           onFocus={() => setShowRecipes(true)}
           onBlur={() => setShowRecipes(false)}
         />
